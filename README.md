@@ -14,10 +14,14 @@ Kubernetes automates deployment, scaling, and management of containerized applic
 ---
 
 ## Screenshot or Push Log
-![Docker Build Screenshot](../../../../../Pictures/Screenshots/Screenshot%20from%202025-05-21%2016-41-27.png)
-![Docker Run Screenshot](../../../../../Pictures/Screenshots/Screenshot%20from%202025-05-21%2016-47-15.png)
-![Dpcker Push Screenshot](../../../../../Pictures/Screenshots/Screenshot%20from%202025-05-21%2017-08-37.png)
-![DockerHub Repository](../../../../../Pictures/Screenshots/Screenshot%20from%202025-05-21%2017-11-37.png)
+![Screenshot from 2025-05-21 16-41-27](https://github.com/user-attachments/assets/1d34a1d0-a9fc-4b90-86b0-7f2fccc64a82)
+
+![Screenshot from 2025-05-21 16-47-15](https://github.com/user-attachments/assets/1ae42287-f9e9-4a48-83c5-a30e755bdf7b)
+
+![Screenshot from 2025-05-21 17-08-37](https://github.com/user-attachments/assets/665994ef-4a93-492e-8cc8-782836c26500)
+
+![Screenshot from 2025-05-21 17-11-37](https://github.com/user-attachments/assets/4bc572f8-214e-4f9e-9494-2f2a35180624)
+
 
 ## Docker Hub Image Link
 [Docker Image](https://hub.docker.com/r/deepaknash/hello-docker)
