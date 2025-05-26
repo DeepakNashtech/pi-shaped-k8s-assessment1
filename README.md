@@ -105,3 +105,85 @@ Node affinity is applied in various scenarios:
 ![alt text](<assets/Screenshot from 2025-05-22 14-34-57.png>) 
 ![alt text](<assets/Screenshot from 2025-05-22 14-42-59.png>) 
 ![alt text](<assets/Screenshot from 2025-05-22 14-43-52.png>)
+
+# Kubernetes Networking and Service Discovery
+
+## Service Types Implementation
+
+### NodePort Service
+- Service name: `hello-express-service`
+- Type: NodePort
+- Port: 80
+- Target Port: 8080
+- Access: Available on all node IPs at the assigned NodePort
+
+### LoadBalancer Service
+- Service name: `hello-express-lb`
+- Type: LoadBalancer
+- Port: 80
+- Target Port: 8080
+- Access: Available through the cloud provider's load balancer IP
+
+### Ingress Configuration
+- Name: `hello-express-ingress`
+- Path: `/api`
+- Backend Service: `hello-express-service`
+- Port: 80
+- Access: Available through the Ingress controller's IP/hostname
+
+## Core Concept Questions
+
+### How would you expose an internal microservice (e.g., user-auth) differently than a public-facing frontend in a Kubernetes-based product?
+
+For internal microservices like user-auth:
+1. Use ClusterIP service type to keep it accessible only within the cluster
+2. Implement network policies to restrict access to specific namespaces
+3. Use service mesh (like Istio) for internal service-to-service communication
+4. Implement mTLS for secure internal communication
+
+For public-facing frontend:
+1. Use LoadBalancer or Ingress for external access
+2. Implement proper TLS termination
+3. Use WAF (Web Application Firewall) for security
+4. Configure proper rate limiting and DDoS protection
+
+### Why might a product use Ingress instead of directly exposing each microservice via LoadBalancer?
+
+1. **Cost Efficiency**: Each LoadBalancer service requires a cloud load balancer, which can be expensive. Ingress uses a single load balancer for multiple services.
+
+2. **Simplified Management**: Ingress provides a single entry point for all services, making it easier to manage SSL/TLS certificates and routing rules.
+
+3. **Advanced Routing**: Ingress supports path-based routing, host-based routing, and can handle complex URL rewrites and redirects.
+
+4. **Security**: Centralized security policies and SSL termination at the Ingress level.
+
+5. **Traffic Management**: Better control over traffic distribution, canary deployments, and A/B testing.
+
+## Testing Instructions
+
+1. Apply the configurations:
+```bash
+kubectl apply -f deployment.yaml
+kubectl apply -f loadbalancer-service.yaml
+kubectl apply -f ingress.yaml
+```
+
+2. Test the services:
+```bash
+# Get NodePort
+kubectl get svc hello-express-service
+
+# Get LoadBalancer IP
+kubectl get svc hello-express-lb
+
+# Get Ingress IP/hostname
+kubectl get ingress hello-express-ingress
+```
+
+3. Access the application:
+- NodePort: `http://<node-ip>:<nodeport>`
+- LoadBalancer: `http://<loadbalancer-ip>`
+- Ingress: `http://<ingress-ip>/api`
+
+![alt text](<assets/Screenshot from 2025-05-26 12-48-06.png>)
+![alt text](<assets/Screenshot from 2025-05-26 12-50-13.png>)
