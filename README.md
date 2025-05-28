@@ -187,3 +187,31 @@ kubectl get ingress hello-express-ingress
 
 ![alt text](<assets/Screenshot from 2025-05-26 12-48-06.png>)
 ![alt text](<assets/Screenshot from 2025-05-26 12-50-13.png>)
+
+# Helm Chart Instructions
+
+## Core Concept Questions
+
+### Why is Helm important for managing configuration across different environments in a real-world product (e.g., dev, staging, prod)?
+Helm allows you to template your Kubernetes manifests and manage configuration using values files. This makes it easy to maintain different settings (like image tags, resource limits, environment variables) for dev, staging, and prod, all from the same chart, reducing duplication and risk of errors.
+
+### How does Helm simplify deployment rollback during a production incident?
+Helm keeps a history of releases. If a deployment causes issues, you can quickly rollback to a previous stable release with a single command (`helm rollback <release> <revision>`), making incident recovery fast and reliable.
+
+## Helm Install/Upgrade Instructions
+
+### Install
+```bash
+helm install hello-express-release ./hello-express \
+  --set image.repository=deepaknash/hello-docker \
+  --set image.tag=assessment1 \
+  --set service.port=8080 \
+  --set replicaCount=2
+```
+
+### Upgrade
+```bash
+helm upgrade hello-express-release ./hello-express \
+  --set replicaCount=3 \
+  --set image.tag=latest
+```
