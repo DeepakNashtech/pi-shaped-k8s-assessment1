@@ -215,3 +215,8 @@ helm upgrade hello-express-release ./hello-express \
   --set replicaCount=3 \
   --set image.tag=latest
 ```
+
+![alt text](<assets/Screenshot from 2025-05-28 13-10-30.png>)
+![alt text](<assets/Screenshot from 2025-05-28 13-10-58.png>)
+![alt text](<assets/Screenshot from 2025-05-28 13-12-57.png>)
+![alt text](<assets/Screenshot from 2025-05-28 13-15-58.png>)
