@@ -1,0 +1,22 @@
+# Horizontal Pod Autoscaler for Backend Deployment
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: backend-hpa
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: backend-deployment # Target the backend deployment
+  minReplicas: 1 # Minimum number of replicas
+  maxReplicas: 5 # Maximum number of replicas
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      # Performance/Cost Consideration: Scaling based on CPU utilization
+      # helps handle load spikes efficiently, ensuring performance while
+      # potentially saving costs by not over-provisioning replicas.
+      target:
+        type: Utilization
+        averageUtilization: 50 # Target 50% CPU utilization
